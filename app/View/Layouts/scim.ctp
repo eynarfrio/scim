@@ -41,12 +41,10 @@ LAST UPDATE: 2015/01/05
         <!--/ Application stylesheet -->
 
         <!-- Theme stylesheet : optional -->
+        <link rel="stylesheet" href="<?php echo $this->webroot; ?>stylesheet/themes/theme2.css">
         <!--/ Theme stylesheet : optional -->
 
-        <!-- modernizr script -->
-        <script type="text/javascript" src="<?php echo $this->webroot; ?>js/javascript/vendor.js"></script>
-        <script type="text/javascript" src="<?php echo $this->webroot; ?>plugins/modernizr/js/modernizr.js"></script>
-        <!--/ modernizr script -->
+
         <!-- END STYLESHEETS -->
     </head>
     <!--/ END Head -->
@@ -145,26 +143,16 @@ LAST UPDATE: 2015/01/05
         <!-- START Template Main -->
         <section id="main" role="main">
             <div class="container-fluid">
-                
+
                 <?php echo $this->fetch('content'); ?>
                 <!-- START modal -->
-                <script>
-                  function cargarmodal(urll)
-                  {
-                      jQuery("#spin-cargando-mod").addClass('show');
-                      jQuery('#modal-principal').modal('show', {backdrop: 'static'});
-                      jQuery("#divmodalimprenta").load(urll, function (responseText, textStatus, req) {
-                          if (textStatus == "error")
-                          {
-                              alert("error!!!");
-                          }
-                          else {
-                              jQuery("#spin-cargando-mod").removeClass('show');
-                          }
-                      });
-
-                  }
-                </script>
+                <style>
+                    .modal .modal-body {
+                        max-height: 430px;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                    }
+                </style>
                 <div id="modal-principal" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -180,6 +168,11 @@ LAST UPDATE: 2015/01/05
         </section>
         <!-- END Template Main -->
 
+        <!-- modernizr script -->
+        <script type="text/javascript" src="<?php echo $this->webroot; ?>js/javascript/vendor.js"></script>
+        <script type="text/javascript" src="<?php echo $this->webroot; ?>plugins/modernizr/js/modernizr.js"></script>
+        <!--/ modernizr script -->
+
         <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
         <!-- Application and vendor script : mandatory -->
 
@@ -192,41 +185,62 @@ LAST UPDATE: 2015/01/05
 
         <script>
 
-                  
-                  function mensaje_flash(titulo, texto, imagen) {
-                      if (imagen != '') {
-                          $.gritter.add({
-                              title: titulo,
-                              text: texto,
-                              image: '<?php echo $this->webroot; ?>image/'+imagen,
-                              sticky: false
-                          });
-                      } else {
-                          $.gritter.add({
-                              title: titulo,
-                              text: texto,
-                              sticky: false
-                          });
-                      }
-                  }
 
-                  function confirma_url(curl, texto)
-                  {
-                      bootbox.confirm(texto, function (result) {
-                          // callback
-                          if (result) {
-                              window.location = curl;
-                          }
-                      });
-                      event.preventDefault();
+          function mensaje_flash(titulo, texto, imagen) {
+              if (imagen != '') {
+                  $.gritter.add({
+                      title: titulo,
+                      text: texto,
+                      image: '<?php echo $this->webroot; ?>image/' + imagen,
+                      sticky: false
+                  });
+              } else {
+                  $.gritter.add({
+                      title: titulo,
+                      text: texto,
+                      sticky: false
+                  });
+              }
+          }
+
+          function confirma_url(curl, texto)
+          {
+              bootbox.confirm(texto, function (result) {
+                  // callback
+                  if (result) {
+                      window.location = curl;
                   }
-                  /*$('#confirmacion-url').on('click', function (event) {
-                   bootbox.confirm('Are you sure?', function (result) {
-                   // callback
-                   });
-                   event.preventDefault();
-                   });*/
-                  //$('#cargaajax').load('<?php echo $this->Html->url(array('controller' => 'Trabajos', 'action' => 'prueba')); ?>');
+              });
+              event.preventDefault();
+          }
+          /*$('#confirmacion-url').on('click', function (event) {
+           bootbox.confirm('Are you sure?', function (result) {
+           // callback
+           });
+           event.preventDefault();
+           });*/
+          //$('#cargaajax').load('<?php //echo $this->Html->url(array('controller' => 'Trabajos', 'action' => 'prueba'));  ?>');
+        </script>
+        <script>
+          function cargarmodal(urll)
+          {
+              $('html').removeClass('sidebar-open-ltr');
+              jQuery("#spin-cargando-mod").addClass('show');
+              jQuery('#modal-principal').modal('show', {backdrop: 'static'});
+              jQuery("#divmodalimprenta").load(urll, function (responseText, textStatus, req) {
+                  if (textStatus == "error")
+                  {
+                      alert("error!!!");
+                  }
+                  else {
+                      jQuery("#spin-cargando-mod").removeClass('show');
+                  }
+              });
+
+          }
+        </script>
+        <script>
+          $('.slimscroll').attr('style', 'width: 100%;');
         </script>
         <?php echo $this->Session->flash(); ?>
         <!-- Plugins and page level script : optional -->

@@ -1,7 +1,7 @@
 <!-- Page Header -->
 <div class="page-header page-header-block">
     <div class="page-header-section">
-        <h4 class="title semibold">Usuarios</h4>
+        <h4 class="title semibold">Roles</h4>
     </div>
 </div>
 <!-- Page Header -->
@@ -10,10 +10,10 @@
 <div class="row">
     <div class="col-md-12">
         <!-- START panel -->
-        <div class="panel panel-inverse">
+        <div class="panel panel-primary">
             <!-- panel heading/header -->
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span> Listado de usuarios</h3>
+                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span> Listado de Roles</h3>
 
             </div>
             <!--/ panel heading/header -->
@@ -26,21 +26,17 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
-                            <th>Usuario</th>
-                            <th>Tipo</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($usuarios as $key => $us): ?>
+                        <?php foreach ($roles as $key => $ro): ?>
                           <tr>
                               <td><?php echo $key + 1 ?></td>
-                              <td><?php echo $us['User']['nombre'] ?></td>
-                              <td><?php echo $us['User']['username'] ?></td>
-                              <td><?php echo $us['User']['role'] ?></td>
+                              <td><?php echo $ro['Role']['nombre'] ?></td>
                               <td class="text-center">
-                                  <a href="javascript:void(0);" class="btn btn-success mb5" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'usuario', $us['User']['id'])); ?>');" title="Editar"><i class="ico-pencil"></i></a>
-                                  <a href="javascript:" class="btn btn-danger mb5" title="Eliminar" type="button" onclick="confirma_url('<?php echo $this->Html->url(array('action' => 'delete', $us['User']['id'])) ?>', '<?php echo 'Esta seguro de eliminar al usuario ' . $us['User']['username']; ?>');">
+                                  <a href="javascript:void(0);" class="btn btn-success mb5" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'role', $ro['Role']['id'])); ?>');" title="Editar"><i class="ico-pencil"></i></a>
+                                  <a href="javascript:" class="btn btn-danger mb5" title="Eliminar" type="button" onclick="confirma_url('<?php echo $this->Html->url(array('action' => 'eliminar', $ro['Role']['id'])) ?>', '<?php echo 'Esta seguro de eliminar el Role ' . $ro['Role']['nombre']; ?>');">
                                       <i class="ico-remove3"></i>
                                   </a>
                               </td>
@@ -48,6 +44,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <br><br><br><br>
             </div>
             <!--/ panel body with collapse capabale -->
         </div>
